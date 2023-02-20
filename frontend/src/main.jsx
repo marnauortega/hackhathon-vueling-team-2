@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import Router from "./components/Router/Router";
 import "./index.css";
 
+// Create a new context
+export const UsersContext = createContext();
+
 function App() {
-  return <Router />;
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("http://localhost:3000/users");
+      const data = await response.json();
+      console.log(data);
+      setUsers(data);
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <UsersContext.Provider value={users}>
+      <Router />
+    </UsersContext.Provider>
+  );
 }
 
 export default App;

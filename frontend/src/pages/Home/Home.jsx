@@ -1,17 +1,9 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { UsersContext } from "../../main";
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:3000/users");
-      const data = await response.json();
-      console.log(data);
-      setUsers(data);
-    }
-    fetchData();
-  }, []);
+  const users = useContext(UsersContext);
 
   return (
     <main className={styles.main}>
