@@ -10,6 +10,7 @@ import equipaje from "../../public/img/equipaje.svg";
 import fakeUsers from "../data/db";
 
 const Home = () => {
+
   const { users, setUsers } = useContext(UsersContext);
 
   const [filters, setfilters] = useState({
@@ -207,6 +208,7 @@ const Home = () => {
           ))}
         </tbody>
       </table>
+
     </main>
   );
 };

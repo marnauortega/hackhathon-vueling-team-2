@@ -5,6 +5,7 @@ import Footer from "./Footer"
 import Home from "../pages/Home"
 import Login from "../pages/Login"
 import { FormPage } from "../pages/FormPage"
+import { Rechart } from "../pages/Rechart"
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/formPage" element={<FormPage />} />
+        <Route path="/chart" element={<Rechart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
