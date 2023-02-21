@@ -1,46 +1,53 @@
-import React, { useState, useEffect, createContext } from "react";
-import ReactDOM from "react-dom/client";
-import Router from "./components/Router";
-import axios from "axios";
-import "./index.css";
-import usersDb from "../src/data/db";
+import React, { useState, useEffect, createContext } from "react"
+import ReactDOM from "react-dom/client"
+import Router from "./components/Router"
+import axios from "axios"
+import "./index.css"
 
 // Create a new context
-export const UsersContext = createContext();
+export const UsersContext = createContext()
 
 function App() {
-  const [users, setUsers] = useState(usersDb);
+  const url = "https://vuelingemployee-api.azurewebsites.net/User/login"
+  const [token, setToken] = useState("")
+  const [users, setUsers] = useState([])
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
+
+  const roleKey = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+
   // useEffect(() => {
-  //   async function fetchData() {
+  //   async function login() {
   //     axios
   //       .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
   //         username: "VuelingEmployeeUser",
   //         password: "VuelingEmployeeUser$123",
   //       })
   //       .then(function (response) {
-  //         console.log(response);
-  //         setUsers(response);
+  //         console.log(response.data.result)
+  //         setUsers(response)
+  //         setToken(response.data.result)
   //       })
   //       .catch(function (error) {
-  //         console.log(error);
-  //       });
+  //         console.log(error)
+  //       })
   //   }
-  //   fetchData();
-  // }, []);
-
-  const userData = { users, setUsers };
+  //   login()
+  // }, [])
 
   return (
-    <UsersContext.Provider value={userData}>
+    <UsersContext.Provider
+      value={(token, email, setToken, setEmail, password, setPassword)}
+    >
       <Router />
     </UsersContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-);
+)
