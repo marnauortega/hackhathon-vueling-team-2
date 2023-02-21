@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
-import { NavLink, useLocation, useNavigate } from "react-router-dom"
+import { NavLink, useLocation, Link, useNavigate } from "react-router-dom"
+
 import logo from "../../public/img/logo-team.svg"
 
 function Navbar() {
   return (
-    <div className="fixed z-10 navbar bg-[#4d4d4d]">
+    <header className="fixed z-10 navbar bg-[#4d4d4d]">
       <div className="flex-1">
-        <img src={logo} className="w-8" alt="logo" />
+        <Link to="/">
+          <img src={logo} className="w-8" alt="logo" />
+        </Link>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
@@ -29,7 +32,10 @@ function Navbar() {
             </a>
             <ul className="p-2 bg-[#4d4d4d] right-0 text-white">
               <li>
-                <a>Table</a>
+                <Link to="/viewer">Viewer</Link>
+              </li>
+              <li>
+                <Link to="/formPage">Editor</Link>
               </li>
               <li>
                 <a>Logout</a>
@@ -38,7 +44,7 @@ function Navbar() {
           </li>
         </ul>
       </div>
-    </div>
+    </header>
   )
 }
 
