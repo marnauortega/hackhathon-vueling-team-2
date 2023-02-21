@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { UsersContext } from "../main"
 
 function Login() {
   const [values, setValues] = useState({
@@ -6,24 +7,9 @@ function Login() {
     password: "",
   })
 
-  const url = "https://vuelingemployee-api.azurewebsites.net/User/login"
-  const [token, setToken] = useState("")
+  const { token } = useContext(UsersContext)
 
-  useEffect(() => {
-    const login = () => {
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          setToken(data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-    login()
-  }, [])
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
   }
 

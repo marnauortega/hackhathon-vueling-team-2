@@ -10,6 +10,7 @@ export const UsersContext = createContext()
 function App() {
   const url = "https://vuelingemployee-api.azurewebsites.net/User/login"
   const [token, setToken] = useState("")
+  const [users, setUsers] = useState([])
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -22,27 +23,28 @@ function App() {
   // }, [])
 
   useEffect(() => {
-    async function fetchData() {
+    async function login() {
       axios
         .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
           username: "VuelingEmployeeUser",
           password: "VuelingEmployeeUser$123",
         })
         .then(function (response) {
-          console.log(response)
+          console.log(response.data.result)
           setUsers(response)
+          setToken(response.data.result)
         })
         .catch(function (error) {
           console.log(error)
         })
     }
-    fetchData()
+    login()
   }, [])
 
   const userData = { users, setUsers }
 
   return (
-    <UsersContext.Provider value={userData}>
+    <UsersContext.Provider value={token}>
       <Router />
     </UsersContext.Provider>
   )
