@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { NavLink, useLocation, Link, useNavigate } from "react-router-dom"
+import styles from "../styles/Header.module.css"
 
 import logo from "../assets/img/logo-team.svg"
+import logoDark from "../assets/img/logo-team-dark.svg"
 
-function Navbar() {
+function Navbar({ children }) {
+  // Función para navegar a la página anterior
+  const navigate = useNavigate()
+  const handleBack = () => {
+    navigate(-1)
+  }
+
   return (
     <header className="fixed z-10 navbar bg-[#4d4d4d]">
       <div className="flex-1">
@@ -36,9 +44,6 @@ function Navbar() {
               </li>
               <li>
                 <Link to="/formPage">Editor</Link>
-              </li>
-              <li>
-                <Link to="/chart">Chart</Link>
               </li>
               <li>
                 <a>Logout</a>

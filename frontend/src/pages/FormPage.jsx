@@ -61,22 +61,27 @@ export const FormPage = () => {
 
   return (
     <>
-      <div className="flex align-center justify-center px-4 pt-10 text-[#4d4d4d] bg-white h-screen">
+      <div className="flex align-center justify-center px-4 pt-10 text-[#4d4d4d] h-screen">
         <form className="flex justify-center mt-10">
           <div className="sm:overflow-hidden sm:rounded-md ">
-            <div className="px-4 py-5 sm:p-6 bg-[#ffcc00]">
-              <h1 className="flex text-gray-700 justify-center items-center font-bold tracking-tight text-3xl">
-                Edit logistic data
-                <lord-icon
-                  src="https://cdn.lordicon.com/puvaffet.json"
-                  trigger="hover"
-                  colors="primary:#262525,secondary:#c55252"
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                  }}
-                ></lord-icon>
+            <div className={`${styles.card} px-6 py-6 sm:p-6 bg-[#ffcc00]`}>
+              <h1
+                className={`${styles.heading} flex text-gray-700 justify-center items-center font-bold tracking-tight text-3xl`}
+              >
+                Edit Employee Data
               </h1>
+              <lord-icon
+                src="https://cdn.lordicon.com/puvaffet.json"
+                trigger="hover"
+                colors="primary:#262525,secondary:#c55252"
+                className={styles.icon}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  display: "block",
+                  margin: "auto",
+                }}
+              ></lord-icon>
               {/* JARDINERA */}
               <h3 className="flex text-gray-700 justify-center items-center font-bold  mt-6 mb-2">
                 Jardinera

@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.link {
+  font-family: "Polysans";
+  text-transform: uppercase;
+  color: white;
+}
+
+.dark {
+  color: #181817;
+}

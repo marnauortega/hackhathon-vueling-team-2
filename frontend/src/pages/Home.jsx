@@ -5,8 +5,7 @@ import fulltime from "../assets/img/full-time-employee.svg";
 import parttime from "../assets/img/part-time-employee.svg";
 import jardinera from "../assets/img/jardinera.svg";
 import equipaje from "../assets/img/equipaje.svg";
-// import coordinacion from "../assets/img/coordinacion.svg";
-import fakeUsers from "../data/db";
+import coordinacion from "../assets/img/coordinacion.svg";
 
 const Home = () => {
   const { users, setUsers } = useContext(UsersContext);
@@ -43,7 +42,15 @@ const Home = () => {
     }
     if (filters.day === "des") {
       const usersCopy = [...users];
-      usersCopy.sort();
+      usersCopy.sort((a, b) => {
+        if (b.day > a.day) {
+          return -1;
+        }
+        if (a.day > b.day) {
+          return 1;
+        }
+        return 0;
+      });
       setUsers(usersCopy);
       setfilters({ ...filters, day: "asc" });
       console.log(usersCopy);
@@ -168,8 +175,8 @@ const Home = () => {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {fakeUsers.map((row) => (
-            <tr key={row.id}>
+          {users.map((row) => (
+            <tr key={row.id} className={styles.row}>
               <td className={styles.cell}>
                 <p>{row.day}</p>
               </td>
@@ -179,7 +186,7 @@ const Home = () => {
               <td className={styles.cell}>
                 <div className={styles.doubleCell}>
                   <img src={selectIcon(row.handlingFunction)} />
-                  <p>{row.handlingFunction}</p>
+                  <p className={styles.task}>{row.handlingFunction}</p>
                 </div>
               </td>
               <td className={styles.cell}>

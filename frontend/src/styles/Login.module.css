@@ -1,0 +1,11 @@
+.card {
+  border-radius: 15px;
+}
+
+.heading {
+  margin: auto;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Polysans";
+  margin-bottom: 3rem;
+}
