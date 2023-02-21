@@ -11,40 +11,34 @@ function App() {
   const url = "https://vuelingemployee-api.azurewebsites.net/User/login"
   const [token, setToken] = useState("")
   const [users, setUsers] = useState([])
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
+
+  const roleKey = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
 
   // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await fetch(url)
-  //     const data = await response.json()
-  //     console.log(data)
-  //     setUsers(data)
+  //   async function login() {
+  //     axios
+  //       .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
+  //         username: "VuelingEmployeeUser",
+  //         password: "VuelingEmployeeUser$123",
+  //       })
+  //       .then(function (response) {
+  //         console.log(response.data.result)
+  //         setUsers(response)
+  //         setToken(response.data.result)
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error)
+  //       })
   //   }
-  //   fetchData()
+  //   login()
   // }, [])
 
-  useEffect(() => {
-    async function login() {
-      axios
-        .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
-          username: "VuelingEmployeeUser",
-          password: "VuelingEmployeeUser$123",
-        })
-        .then(function (response) {
-          console.log(response.data.result)
-          setUsers(response)
-          setToken(response.data.result)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    }
-    login()
-  }, [])
-
-  const userData = { users, setUsers }
-
   return (
-    <UsersContext.Provider value={token}>
+    <UsersContext.Provider
+      value={(token, email, setToken, setEmail, password, setPassword)}
+    >
       <Router />
     </UsersContext.Provider>
   )

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/img/logo-team.svg";
+import { Link } from "react-router-dom"
+import logo from "../assets/img/logo-team.svg"
 
 const Header = () => {
   return (
@@ -16,10 +16,13 @@ const Header = () => {
           <li>
             <Link to="/formPage">Form</Link>
           </li>
+          <li>
+            <Link to="/chart">Chart</Link>
+          </li>
         </ul>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

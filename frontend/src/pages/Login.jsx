@@ -1,16 +1,37 @@
 import { useContext, useEffect, useState } from "react"
+import axios, { Axios } from "axios"
+import { Navigate, useNavigate } from "react-router-dom"
 import { UsersContext } from "../main"
 
 function Login() {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  })
+  const navigate = useNavigate()
+  const [user, setUser] = useState(null)
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [token, setToken] = useState("")
 
-  const { token } = useContext(UsersContext)
+  // username: "VuelingEmployeeUser",
+  // password: "VuelingEmployeeUser$123",
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
+    axios
+      .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
+        username: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response.data.result)
+        setToken(response.data.result)
+        localStorage.setItem("token", response.data.result)
+        setUser(email)
+        console.log("token", token)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
+    navigate("/formPage")
   }
 
   return (
@@ -36,14 +57,12 @@ function Login() {
                   <input
                     id="email-address"
                     name="email"
-                    type="email"
+                    type="text"
                     required
                     className="p-1 rounded-sm w-full max-w-xs bg-white"
                     placeholder="User email"
-                    value={values.email}
-                    onChange={(e) =>
-                      setValues((prev) => ({ ...prev, email: e.target.value }))
-                    }
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
@@ -57,13 +76,8 @@ function Login() {
                     required
                     className="p-1 rounded-sm w-full bg-white"
                     placeholder="Contraseña"
-                    value={values.password}
-                    onChange={(e) =>
-                      setValues((prev) => ({
-                        ...prev,
-                        password: e.target.value,
-                      }))
-                    }
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                   />
                 </div>
               </div>

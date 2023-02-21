@@ -1,69 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react"
+import { UsersContext } from "../main"
 
 export const FormPage = () => {
   // const url ='https://vuelingemployee-api.azurewebsites.net/Handling'
 
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState({ show: false, msg: '' })
+  const [error, setError] = useState({ show: false, msg: "" })
   const [data, setData] = useState({})
 
-
   // Full Time states
-  const [fullTimeJardinera, setFullTimeJardinera] = useState(6);
-  const [fullTimeEquipaje, setFullTimeEquipaje] = useState(7.25);
-  const [fullTimeCoordinacion, setFullTimeCoordinacion] = useState(10);
+  const [fullTimeJardinera, setFullTimeJardinera] = useState(6)
+  const [fullTimeEquipaje, setFullTimeEquipaje] = useState(7.25)
+  const [fullTimeCoordinacion, setFullTimeCoordinacion] = useState(10)
 
   // Part Time states
 
-  const [partTimeJardinera, setPartTimeJardinera] = useState(7.5);
-  const [partTimeEquipaje, setPartTimeEquipaje] = useState(7);
-  const [partTimeCoordinacion, setPartTimeCoordinacion] = useState(8.5);
+  const [partTimeJardinera, setPartTimeJardinera] = useState(7.5)
+  const [partTimeEquipaje, setPartTimeEquipaje] = useState(7)
+  const [partTimeCoordinacion, setPartTimeCoordinacion] = useState(8.5)
 
-const fetchUrl = async() => {
-  const url ='https://vuelingemployee-api.azurewebsites.net/Costs'
-setIsLoading(true)
-try {
-  const response = await fetch(url)
-  const data = await response.json()
-  console.log(data.result[0].fullTimeCost)
+  const fetchUrl = async () => {
+    const url = "https://vuelingemployee-api.azurewebsites.net/Costs"
+    setIsLoading(true)
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(url, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      const data = await response.json()
+      console.log(data.result[0].fullTimeCost)
 
-  setFullTimeJardinera(data.result[0].fullTimeCost)
-  setPartTimeJardinera(data.result[0].partTimeCost)
+      setFullTimeJardinera(data.result[0].fullTimeCost)
+      setPartTimeJardinera(data.result[0].partTimeCost)
 
-  setFullTimeCoordinacion(data.result[1].fullTimeCost)
-  setPartTimeCoordinacion(data.result[1].partTimeCost)
+      setFullTimeCoordinacion(data.result[1].fullTimeCost)
+      setPartTimeCoordinacion(data.result[1].partTimeCost)
 
-  setFullTimeEquipaje(data.result[2].fullTimeCost)
-  setPartTimeEquipaje(data.result[2].partTimeCost)
+      setFullTimeEquipaje(data.result[2].fullTimeCost)
+      setPartTimeEquipaje(data.result[2].partTimeCost)
 
-  
+      if (data.isOk === "true") {
+        setData(data.result)
+        console.log(data.result)
+        setError({ show: false, msg: "" })
+        setIsLoading(false)
+      } else {
+        setError({ show: true, msg: data.Error })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  if (data.isOk === 'true') {
-    setData(data.result )
-    console.log(data.result)
-    setError({ show: false, msg: '' })
-    setIsLoading(false)
-  
-}else{
-  setError({ show: true, msg: data.Error })
-}
-}
- catch (error) {
-  console.log(error)
-}
-}
-
-
-
-
-const handleFormSubmit = (e) => {
-    e.preventDefault();
-  };
- 
-  useEffect(() => {
-    fetchUrl();
-   
-  }, []);
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    fetchUrl()
+  }
 
   return (
     <>
@@ -237,5 +231,5 @@ const handleFormSubmit = (e) => {
         </form>
       </div>
     </>
-  );
-};
+  )
+}

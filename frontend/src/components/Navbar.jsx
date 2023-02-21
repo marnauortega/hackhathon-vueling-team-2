@@ -38,6 +38,9 @@ function Navbar() {
                 <Link to="/formPage">Editor</Link>
               </li>
               <li>
+                <Link to="/chart">Chart</Link>
+              </li>
+              <li>
                 <a>Logout</a>
               </li>
             </ul>
