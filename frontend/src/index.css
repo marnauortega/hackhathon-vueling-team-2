@@ -1,8 +1,13 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ----------------------------- 
         RESET
 ----------------------------- */
 
-* {
+/* * {
   margin: 0;
 }
 
@@ -21,13 +26,13 @@ button,
 textarea,
 select {
   font: inherit;
-}
+} */
 
 /* ----------------------------- 
         GLOBAL
 ----------------------------- */
 
-:root {
+/* :root {
   --main-color: #ffcc00;
   --dark-color: #181817;
 }
@@ -41,4 +46,4 @@ body {
 a {
   text-decoration: none;
   color: white;
-}
+} */
