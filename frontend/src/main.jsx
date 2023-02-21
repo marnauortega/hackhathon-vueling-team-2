@@ -8,18 +8,25 @@ export const UsersContext = createContext();
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/users");
+      const response = await fetch("http://localhost:3000/result");
       const data = await response.json();
-      console.log(data);
       setUsers(data);
+      setFilteredUsers(data);
     }
     fetchData();
   }, []);
 
+  const allUsers = {
+    users,
+    filteredUsers,
+    setFilteredUsers,
+  };
+
   return (
-    <UsersContext.Provider value={users}>
+    <UsersContext.Provider value={allUsers}>
       <Router />
     </UsersContext.Provider>
   );
