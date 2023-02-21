@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import styles from "../styles/Form.module.css";
 
 export const FormPage = () => {
   // const url ='https://vuelingemployee-api.azurewebsites.net/Handling'
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState({ show: false, msg: '' })
-  const [data, setData] = useState({})
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState({ show: false, msg: "" });
+  const [data, setData] = useState({});
 
   // Full Time states
   const [fullTimeJardinera, setFullTimeJardinera] = useState(6);
@@ -19,80 +19,72 @@ export const FormPage = () => {
   const [partTimeEquipaje, setPartTimeEquipaje] = useState(7);
   const [partTimeCoordinacion, setPartTimeCoordinacion] = useState(8.5);
 
-const fetchUrl = async() => {
-  const url ='https://vuelingemployee-api.azurewebsites.net/Costs'
-setIsLoading(true)
-try {
-  const response = await fetch(url)
-  const data = await response.json()
-  console.log(data.result[0].fullTimeCost)
+  const fetchUrl = async () => {
+    const url = "https://vuelingemployee-api.azurewebsites.net/Costs";
+    setIsLoading(true);
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data.result[0].fullTimeCost);
 
-  setFullTimeJardinera(data.result[0].fullTimeCost)
-  setPartTimeJardinera(data.result[0].partTimeCost)
+      setFullTimeJardinera(data.result[0].fullTimeCost);
+      setPartTimeJardinera(data.result[0].partTimeCost);
 
-  setFullTimeCoordinacion(data.result[1].fullTimeCost)
-  setPartTimeCoordinacion(data.result[1].partTimeCost)
+      setFullTimeCoordinacion(data.result[1].fullTimeCost);
+      setPartTimeCoordinacion(data.result[1].partTimeCost);
 
-  setFullTimeEquipaje(data.result[2].fullTimeCost)
-  setPartTimeEquipaje(data.result[2].partTimeCost)
+      setFullTimeEquipaje(data.result[2].fullTimeCost);
+      setPartTimeEquipaje(data.result[2].partTimeCost);
 
-  
+      if (data.isOk === "true") {
+        setData(data.result);
+        console.log(data.result);
+        setError({ show: false, msg: "" });
+        setIsLoading(false);
+      } else {
+        setError({ show: true, msg: data.Error });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  if (data.isOk === 'true') {
-    setData(data.result )
-    console.log(data.result)
-    setError({ show: false, msg: '' })
-    setIsLoading(false)
-  
-}else{
-  setError({ show: true, msg: data.Error })
-}
-}
- catch (error) {
-  console.log(error)
-}
-}
-
-
-
-
-const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
   };
- 
+
   useEffect(() => {
     fetchUrl();
-   
   }, []);
 
   return (
     <>
-      <div className="flex align-center justify-center px-4 pt-10 text-[#4d4d4d] bg-white h-screen">
+      <div className="flex align-center justify-center px-4 pt-10 text-[#4d4d4d] h-screen">
         <form className="flex justify-center mt-10">
           <div className="sm:overflow-hidden sm:rounded-md ">
-            <div className="px-4 py-5 sm:p-6 bg-[#ffcc00]">
-              <h1 className="flex text-gray-700 justify-center items-center font-bold tracking-tight text-3xl">
-                Edit logistic data
-                <lord-icon
-                  src="https://cdn.lordicon.com/puvaffet.json"
-                  trigger="hover"
-                  colors="primary:#262525,secondary:#c55252"
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                  }}
-                ></lord-icon>
+            <div className={`${styles.card} px-6 py-6 sm:p-6 bg-[#ffcc00]`}>
+              <h1
+                className={`${styles.heading} flex text-gray-700 justify-center items-center font-bold tracking-tight text-3xl`}
+              >
+                Edit Employee Data
               </h1>
+              <lord-icon
+                src="https://cdn.lordicon.com/puvaffet.json"
+                trigger="hover"
+                colors="primary:#262525,secondary:#c55252"
+                className={styles.icon}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  display: "block",
+                  margin: "auto",
+                }}
+              ></lord-icon>
               {/* JARDINERA */}
-              <h3 className="flex text-gray-700 justify-center items-center font-bold  mt-6 mb-2">
-                Jardinera
-              </h3>
+              <h3 className="flex text-gray-700 justify-center items-center font-bold  mt-6 mb-2">Jardinera</h3>
               <div className="flex gap-6">
                 <div className="">
-                  <label
-                    htmlFor="fullTimeJardinera"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="fullTimeJardinera" className="block text-sm font-medium text-gray-700">
                     Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -109,10 +101,7 @@ const handleFormSubmit = (e) => {
                   </div>
                 </div>
                 <div className="">
-                  <label
-                    htmlFor="partTimeJardinera"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="partTimeJardinera" className="block text-sm font-medium text-gray-700">
                     Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -131,15 +120,10 @@ const handleFormSubmit = (e) => {
               </div>
 
               {/* EQUIPAJE */}
-              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">
-                Equipaje
-              </h3>
+              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">Equipaje</h3>
               <div className="flex gap-6">
                 <div className="">
-                  <label
-                    htmlFor="fullTimeEquipaje"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="fullTimeEquipaje" className="block text-sm font-medium text-gray-700">
                     Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -156,10 +140,7 @@ const handleFormSubmit = (e) => {
                   </div>
                 </div>
                 <div className="">
-                  <label
-                    htmlFor="partTimeEquipaje"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="partTimeEquipaje" className="block text-sm font-medium text-gray-700">
                     Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -177,15 +158,10 @@ const handleFormSubmit = (e) => {
                 </div>
               </div>
               {/* Coordinacion */}
-              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">
-                Coordinación
-              </h3>
+              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">Coordinación</h3>
               <div className="flex gap-6">
                 <div className="">
-                  <label
-                    htmlFor="fullTimeCoordinacion"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="fullTimeCoordinacion" className="block text-sm font-medium text-gray-700">
                     Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -202,10 +178,7 @@ const handleFormSubmit = (e) => {
                   </div>
                 </div>
                 <div className="">
-                  <label
-                    htmlFor="partTimeCoordinacion"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="partTimeCoordinacion" className="block text-sm font-medium text-gray-700">
                     Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
