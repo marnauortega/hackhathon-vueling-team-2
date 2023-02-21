@@ -169,7 +169,7 @@ const Home = () => {
         </thead>
         <tbody className={styles.tableBody}>
           {fakeUsers.map((row) => (
-            <tr key={row.id}>
+            <tr key={row.id} className={styles.row}>
               <td className={styles.cell}>
                 <p>{row.day}</p>
               </td>

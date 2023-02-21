@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/img/logo-team.svg";
+import logoDark from "../assets/img/logo-team-dark.svg";
 
 function Navbar({ children }) {
   // Función para navegar a la página anterior
@@ -10,23 +11,29 @@ function Navbar({ children }) {
     navigate(-1);
   };
 
+  const location = useLocation();
+
   return (
-    <header className="fixed z-10 navbar bg-[#4d4d4d]">
+    <header className={`${location.pathname === "/login" ? "bg-[#181817]" : "bg-[#ffcc00]"} fixed z-10 navbar`}>
       <div className="flex-1">
         <Link to="/">
-          <img src={logo} className="w-8" alt="logo" />
+          {location.pathname === "/login" ? (
+            <img src={logo} className="w-8" alt="logo" />
+          ) : (
+            <img src={logoDark} className="w-8" alt="logo" />
+          )}
         </Link>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li tabIndex={0}>
-            <a className="text-white">
+            <a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="currentColor"
+                stroke={`${location.pathname === "/login" ? "white" : "black"} `}
                 className="w-6 h-6"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
