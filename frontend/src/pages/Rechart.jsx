@@ -1,18 +1,26 @@
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { useEffect, useState } from "react";
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js"
+import { Bar } from "react-chartjs-2"
+import { useEffect, useState } from "react"
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export const Rechart = () => {
   const [chartData, setChartData] = useState({
     datasets: [],
-  });
-  const [chartOptions, setChartOptions] = useState({});
+  })
+  const [chartOptions, setChartOptions] = useState({})
 
   const [chartData2, setChartData2] = useState({
     datasets: [],
-  });
-  const [chartOptions2, setChartOptions2] = useState({});
+  })
+  const [chartOptions2, setChartOptions2] = useState({})
 
   const drawchart = () => {
     setChartData({
@@ -25,7 +33,7 @@ export const Rechart = () => {
           backgroundColor: ["rgba(142, 149, 44, 0.6)"],
         },
       ],
-    });
+    })
 
     setChartOptions({
       responsive: true,
@@ -38,7 +46,7 @@ export const Rechart = () => {
           text: "Datos de gastos logísticos",
         },
       },
-    });
+    })
     setChartData2({
       labels: ["Jardinera", "Equipaje", "Coordinacion"],
       datasets: [
@@ -49,7 +57,7 @@ export const Rechart = () => {
           backgroundColor: ["rgba(34, 83, 206, 0.6)"],
         },
       ],
-    });
+    })
 
     setChartOptions2({
       responsive: true,
@@ -62,12 +70,12 @@ export const Rechart = () => {
           text: "Datos de gastos logísticos Part Time",
         },
       },
-    });
-  };
+    })
+  }
 
   useEffect(() => {
-    drawchart();
-  }, []);
+    drawchart()
+  }, [])
 
   return (
     <>
@@ -75,5 +83,5 @@ export const Rechart = () => {
       <Bar options={chartOptions} data={chartData}></Bar>
       <Bar options={chartOptions2} data={chartData2}></Bar>
     </>
-  );
-};
+  )
+}
