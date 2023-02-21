@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import axios, { Axios } from "axios"
+import styles from "../styles/Home.module.css"
 import { Navigate, useNavigate } from "react-router-dom"
-import { UsersContext } from "../main"
 
 function Login() {
   const navigate = useNavigate()
@@ -31,7 +31,9 @@ function Login() {
         console.log(error)
       })
 
-    navigate("/formPage")
+    email === "VuelingEmployeeUser"
+      ? navigate("/viewer")
+      : navigate("/formPage")
   }
 
   return (
