@@ -23,7 +23,9 @@ function App() {
   // }, [])
 
   useEffect(() => {
+
     async function login() {
+
       axios
         .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
           username: "VuelingEmployeeUser",
@@ -35,8 +37,10 @@ function App() {
           setToken(response.data.result)
         })
         .catch(function (error) {
+
           console.log(error)
         })
+
     }
     login()
   }, [])
