@@ -7,9 +7,10 @@ import parttime from "../../public/img/part-time-employee.svg";
 import jardinera from "../../public/img/jardinera.svg";
 import equipaje from "../../public/img/equipaje.svg";
 // import coordinacion from "../../public/img/coordinacion.svg";
+import fakeUsers from "../data/db";
 
 const Home = () => {
-  const { users, filteredUsers, setFilteredUsers } = useContext(UsersContext);
+  const { users, setUsers } = useContext(UsersContext);
 
   const [filters, setfilters] = useState({
     day: "des",
@@ -18,8 +19,6 @@ const Home = () => {
     totalEmployees: "des",
     totalCost: "des",
   });
-
-  // console.log(users, filteredUsers);
 
   const selectIcon = (input) => {
     if (input.toLowerCase() === "jardinera") return jardinera;
@@ -39,14 +38,14 @@ const Home = () => {
         }
         return 0;
       });
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, day: "des" });
       console.log(usersCopy);
     }
     if (filters.day === "des") {
       const usersCopy = [...users];
       usersCopy.sort();
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, day: "asc" });
       console.log(usersCopy);
     }
@@ -56,13 +55,13 @@ const Home = () => {
     if (filters.hour === "asc") {
       const usersCopy = [...users];
       usersCopy.sort((a, b) => a.hour - b.hour);
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, hour: "des" });
     }
     if (filters.hour === "des") {
       const usersCopy = [...users];
       usersCopy.sort((a, b) => b.hour - a.hour);
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, hour: "asc" });
     }
   };
@@ -79,7 +78,7 @@ const Home = () => {
         }
         return 0;
       });
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, handlingFunction: "des" });
     }
     if (filters.handlingFunction === "des") {
@@ -93,7 +92,7 @@ const Home = () => {
         }
         return 0;
       });
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, handlingFunction: "asc" });
     }
   };
@@ -102,14 +101,14 @@ const Home = () => {
     if (filters.totalEmployees === "asc") {
       const usersCopy = [...users];
       usersCopy.sort((a, b) => a.totalEmployees - b.totalEmployees);
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, totalEmployees: "des" });
       console.log(usersCopy);
     }
     if (filters.totalEmployees === "des") {
       const usersCopy = [...users];
       usersCopy.sort((a, b) => b.totalEmployees - a.totalEmployees);
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, totalEmployees: "asc" });
       console.log(usersCopy);
     }
@@ -119,13 +118,13 @@ const Home = () => {
     if (filters.totalCost === "asc") {
       const usersCopy = [...users];
       usersCopy.sort((a, b) => a.totalCost - b.totalCost);
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, totalCost: "des" });
     }
     if (filters.totalCost === "des") {
       const usersCopy = [...users];
       usersCopy.sort((a, b) => b.totalCost - a.totalCost);
-      setFilteredUsers(usersCopy);
+      setUsers(usersCopy);
       setfilters({ ...filters, totalCost: "asc" });
     }
   };
@@ -170,7 +169,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {filteredUsers.map((row) => (
+          {fakeUsers.map((row) => (
             <tr key={row.id}>
               <td className={styles.cell}>
                 <p>{row.day}</p>
