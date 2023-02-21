@@ -1,28 +1,30 @@
-import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
-import Navbar from "../components/Navbar"
+import { useEffect, useState } from "react"
 
 function Login() {
-  const usersFake = [
-    { email: "admin@admin.com", password: "1234admin" },
-    { email: "user@user.com", password: "1234user" },
-  ]
-
   const [values, setValues] = useState({
     email: "",
     password: "",
   })
 
+  const url = "https://vuelingemployee-api.azurewebsites.net/User/login"
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    const login = () => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          setToken(data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    login()
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    usersFake.map((item) => {
-      if (values.email === item.email && values.password === item.password) {
-        console.log("has entrado")
-      } else {
-        console.log("datos no válidos")
-      }
-    })
   }
 
   return (

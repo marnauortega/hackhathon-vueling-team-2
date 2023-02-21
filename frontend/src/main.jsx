@@ -1,34 +1,50 @@
-import React, { useState, useEffect, createContext } from "react";
-import ReactDOM from "react-dom/client";
-import Router from "./components/Router";
-import "./index.css";
+import React, { useState, useEffect, createContext } from "react"
+import ReactDOM from "react-dom/client"
+import Router from "./components/Router"
+import "./index.css"
 
 // Create a new context
-export const UsersContext = createContext();
+export const UsersContext = createContext()
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const url = "https://vuelingemployee-api.azurewebsites.net/User/login"
+  const [token, setToken] = useState("")
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch(url)
+  //     const data = await response.json()
+  //     console.log(data)
+  //     setUsers(data)
+  //   }
+  //   fetchData()
+  // }, [])
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:3000/users");
-      const data = await response.json();
-      console.log(data);
-      setUsers(data);
+    const login = () => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          setToken(data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
-    fetchData();
-  }, []);
+    login()
+  }, [])
 
   return (
-    <UsersContext.Provider value={users}>
+    <UsersContext.Provider value={token}>
       <Router />
     </UsersContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-);
+)

@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import logo from "../../public/img/logo-team.svg"
 
-function Navbar({ children }) {
-  // Función para navegar a la página anterior
-  const navigate = useNavigate()
-  const handleBack = () => {
-    navigate(-1)
-  }
-
+function Navbar() {
   return (
     <div className="fixed z-10 navbar bg-[#4d4d4d]">
       <div className="flex-1">
