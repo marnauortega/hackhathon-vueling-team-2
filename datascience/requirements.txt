@@ -1,0 +1,5 @@
+flask
+pylint
+pulp==2.7.0
+wheel
+pandas==1.3.5
