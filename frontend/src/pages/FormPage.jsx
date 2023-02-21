@@ -20,6 +20,7 @@ export const FormPage = () => {
                   >
                     Date:
                   </label>
+                  
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700">
                     <input
                       type="date"
