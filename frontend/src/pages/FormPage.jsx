@@ -1,19 +1,90 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const FormPage = () => {
-  const [data, setdata] = useState({});
+  // const url ='https://vuelingemployee-api.azurewebsites.net/Handling'
+
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState({ show: false, msg: '' })
+  const [data, setData] = useState({})
+
+
+  // Full Time states
+  const [fullTimeJardinera, setFullTimeJardinera] = useState(6);
+  const [fullTimeEquipaje, setFullTimeEquipaje] = useState(7.25);
+  const [fullTimeCoordinacion, setFullTimeCoordinacion] = useState(10);
+
+  // Part Time states
+
+  const [partTimeJardinera, setPartTimeJardinera] = useState(7.5);
+  const [partTimeEquipaje, setPartTimeEquipaje] = useState(7);
+  const [partTimeCoordinacion, setPartTimeCoordinacion] = useState(8.5);
+
+const fetchUrl = async() => {
+  const url ='https://vuelingemployee-api.azurewebsites.net/Costs'
+setIsLoading(true)
+try {
+  const response = await fetch(url)
+  const data = await response.json()
+  console.log(data.result[0].fullTimeCost)
+
+  setFullTimeJardinera(data.result[0].fullTimeCost)
+  setPartTimeJardinera(data.result[0].partTimeCost)
+
+  setFullTimeCoordinacion(data.result[1].fullTimeCost)
+  setPartTimeCoordinacion(data.result[1].partTimeCost)
+
+  setFullTimeEquipaje(data.result[2].fullTimeCost)
+  setPartTimeEquipaje(data.result[2].partTimeCost)
+
+  
+
+  if (data.isOk === 'true') {
+    setData(data.result )
+    console.log(data.result)
+    setError({ show: false, msg: '' })
+    setIsLoading(false)
+  
+}else{
+  setError({ show: true, msg: data.Error })
+}
+}
+ catch (error) {
+  console.log(error)
+}
+}
+
+
+
+
+const handleFormSubmit = (e) => {
+    e.preventDefault();
+  };
+ 
+  useEffect(() => {
+    fetchUrl();
+   
+  }, []);
+
   return (
     <>
-      <div className="flex align-center h-full justify-center px-4 text-[#4d4d4d]">
-        <form className="">
-          <div className=" sm:overflow-hidden sm:rounded-md ">
-            <div className="space-y-6 px-4 py-5 sm:p-6 bg-[#ffcc00]">
-              <h1 className="flex text-gray-700 justify-center items-center font-semibold text-2xl">
+      <div className="flex align-center justify-center px-4 pt-10 text-[#4d4d4d] bg-white h-screen">
+        <form className="flex justify-center mt-10">
+          <div className="sm:overflow-hidden sm:rounded-md ">
+            <div className="px-4 py-5 sm:p-6 bg-[#ffcc00]">
+              <h1 className="flex text-gray-700 justify-center items-center font-bold tracking-tight text-3xl">
                 Edit logistic data
+                <lord-icon
+                  src="https://cdn.lordicon.com/puvaffet.json"
+                  trigger="hover"
+                  colors="primary:#262525,secondary:#c55252"
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                  }}
+                ></lord-icon>
               </h1>
-
               {/* JARDINERA */}
-              <h3 className="flex text-gray-700 justify-center items-center font-semibold">
+              <h3 className="flex text-gray-700 justify-center items-center font-bold  mt-6 mb-2">
                 Jardinera
               </h3>
               <div className="flex gap-6">
@@ -22,15 +93,16 @@ export const FormPage = () => {
                     htmlFor="fullTimeJardinera"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Full Time
+                    Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
                     <input
                       type="number"
+                      step="any"
                       name="fullTimeJardinera"
                       min={0}
-                      // value={data.date}
-                      // onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setFullTimeJardinera(e.target.value)}
+                      value={fullTimeJardinera}
                       className="block w-full flex-1  sm:text-sm bg-white p-1 rounded-sm text-gray-700"
                       placeholder="€/h"
                     />
@@ -41,15 +113,16 @@ export const FormPage = () => {
                     htmlFor="partTimeJardinera"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Part Time
+                    Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
                     <input
                       type="number"
+                      step="any"
                       name="partTimeJardinera"
                       min={0}
-                      // value={data.date}
-                      // onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setPartTimeJardinera(e.target.value)}
+                      value={partTimeJardinera}
                       className="block w-full flex-1  sm:text-sm bg-white p-1 rounded-sm text-gray-700"
                       placeholder="€/h"
                     />
@@ -58,7 +131,7 @@ export const FormPage = () => {
               </div>
 
               {/* EQUIPAJE */}
-              <h3 className="flex text-gray-700 justify-center items-center font-semibold">
+              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">
                 Equipaje
               </h3>
               <div className="flex gap-6">
@@ -67,15 +140,16 @@ export const FormPage = () => {
                     htmlFor="fullTimeEquipaje"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Full Time
+                    Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
                     <input
                       type="number"
+                      step="any"
                       name="fullTimeEquipaje"
                       min={0}
-                      // value={data.date}
-                      // onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setFullTimeEquipaje(e.target.value)}
+                      value={fullTimeEquipaje}
                       className="block w-full flex-1  sm:text-sm bg-white p-1 rounded-sm text-gray-700"
                       placeholder="€/h"
                     />
@@ -86,15 +160,16 @@ export const FormPage = () => {
                     htmlFor="partTimeEquipaje"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Part Time
+                    Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
                     <input
                       type="number"
+                      step="any"
                       name="partTimeEquipaje"
                       min={0}
-                      // value={data.date}
-                      // onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setPartTimeEquipaje(e.target.value)}
+                      value={partTimeEquipaje}
                       className="block w-full flex-1  sm:text-sm bg-white p-1 rounded-sm text-gray-700"
                       placeholder="€/h"
                     />
@@ -102,7 +177,7 @@ export const FormPage = () => {
                 </div>
               </div>
               {/* Coordinacion */}
-              <h3 className="flex text-gray-700 justify-center items-center font-semibold">
+              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">
                 Coordinación
               </h3>
               <div className="flex gap-6">
@@ -111,15 +186,16 @@ export const FormPage = () => {
                     htmlFor="fullTimeCoordinacion"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Full Time
+                    Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
                     <input
                       type="number"
+                      step="any"
                       name="fullTimeCoordinacion"
                       min={0}
-                      // value={data.date}
-                      // onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setFullTimeCoordinacion(e.target.value)}
+                      value={fullTimeCoordinacion}
                       className="block w-full flex-1  sm:text-sm bg-white p-1 rounded-sm text-gray-700"
                       placeholder="€/h"
                     />
@@ -130,15 +206,16 @@ export const FormPage = () => {
                     htmlFor="partTimeCoordinacion"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Part Time
+                    Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
                     <input
                       type="number"
+                      step="any"
                       name="partTimeCoordinacion"
                       min={0}
-                      // value={data.date}
-                      // onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setPartTimeCoordinacion(e.target.value)}
+                      value={partTimeCoordinacion}
                       className="block w-full flex-1  sm:text-sm bg-white p-1 rounded-sm text-gray-700"
                       placeholder="€/h"
                     />
@@ -147,9 +224,9 @@ export const FormPage = () => {
               </div>
 
               {/* button */}
-              <div className="px-4 py-3 text-right sm:px-6">
+              <div className="px-4 py-3 text-right sm:px-6 mt-4">
                 <button
-                  type="submit"
+                  onClick={(e) => handleFormSubmit}
                   className="inline-flex justify-center items-center text-sm font-medium   hover:bg-slate-600 rounded-full bg-[#4d4d4d] text-white px-8 py-2"
                 >
                   Send
