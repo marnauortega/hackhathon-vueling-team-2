@@ -1,14 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import { FormPage } from "../pages/FormPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Header from "./Header"
+import Navbar from "./Navbar"
+import Footer from "./Footer"
+import Home from "../pages/Home"
+import Login from "../pages/Login"
+import { FormPage } from "../pages/FormPage"
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Header />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -16,7 +17,7 @@ const Router = () => {
       </Routes>
       <Footer />
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default Router;
+export default Router
