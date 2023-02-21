@@ -1,7 +1,7 @@
 @font-face {
   font-family: "PolySans";
   font-weight: 900;
-  src: url("/fonts/PolySans-Black.woff2") format("woff2");
+  src: url("../assets/fonts/PolySans-Black.woff2") format("woff2");
 }
 
 .tableBg {
