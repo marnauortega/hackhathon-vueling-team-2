@@ -1,7 +1,18 @@
+
+
+import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import styles from "../styles/Login.module.css";
+import line from "../assets/img/line.svg";
+import ellipse from "../assets/img/ellipse.png";
+import triangle from "../assets/img/triangle.png";
+import suitcase from "../assets/img/suitcase.png";
+import square from "../assets/img/square.png";
+import hands from "../assets/img/hands.png";
 import { useContext, useEffect, useState } from "react"
 import axios, { Axios } from "axios"
-import styles from "../styles/Home.module.css"
 import { Navigate, useNavigate } from "react-router-dom"
+
 
 function Login() {
   const navigate = useNavigate()
@@ -38,6 +49,28 @@ function Login() {
 
   return (
     <>
+      <h1 className={styles.h1}>
+        Optimize <br />
+        your airport
+        <br /> personnel
+      </h1>
+      <img src={line} className={styles.line} />
+      <div className={styles.grid}>
+        <div className={styles.right}>
+          <img src={ellipse} className={styles.ellipse} />
+          <p className={styles.p}>GET THE BUSES FROM TERMINAL TO PLANES WITH COMPLETE FLEXIBILITY</p>
+        </div>
+        <div>
+          <img src={triangle} className={styles.triangle} />
+          <img src={suitcase} className={styles.suitcase} />
+          <p className={`${styles.p} ${styles.left}`}>GET THE LUGGAGE ON BOARD FOR A TIMELY DEPARTURE WITH NO DELAYS</p>
+        </div>
+        <div className={styles.secondRight}>
+          <img src={square} className={styles.square} />
+          <img src={hands} className={styles.hands} />
+          <p className={styles.p}>INTEGRATE ALL TASKS BETWEEN TEAMS WITH UTMOST HARMONY</p>
+        </div>
+      </div>
       <div className="relative flex items-center h-screen justify-center px-4 text-[#4d4d4d]">
         <div
           className={`${styles.card} flex w-[400px] h-[300px] bg-[#ffcc00] flex-col justify-between p-6`}
