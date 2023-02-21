@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, Link, useNavigate } from "react-router-dom";
 
-import logo from "../../public/img/logo-team.svg";
+import logo from "../assets/img/logo-team.svg";
 
 function Navbar({ children }) {
   // Función para navegar a la página anterior

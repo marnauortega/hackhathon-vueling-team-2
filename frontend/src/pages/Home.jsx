@@ -1,16 +1,14 @@
 import { useContext, useState } from "react";
 import { UsersContext } from "../main";
 import styles from "../styles/Home.module.css";
-import table from "../../public/img/table.png";
-import fulltime from "../../public/img/full-time-employee.svg";
-import parttime from "../../public/img/part-time-employee.svg";
-import jardinera from "../../public/img/jardinera.svg";
-import equipaje from "../../public/img/equipaje.svg";
-// import coordinacion from "../../public/img/coordinacion.svg";
+import fulltime from "../assets/img/full-time-employee.svg";
+import parttime from "../assets/img/part-time-employee.svg";
+import jardinera from "../assets/img/jardinera.svg";
+import equipaje from "../assets/img/equipaje.svg";
+// import coordinacion from "../assets/img/coordinacion.svg";
 import fakeUsers from "../data/db";
 
 const Home = () => {
-
   const { users, setUsers } = useContext(UsersContext);
 
   const [filters, setfilters] = useState({
@@ -208,7 +206,6 @@ const Home = () => {
           ))}
         </tbody>
       </table>
-
     </main>
   );
 };
