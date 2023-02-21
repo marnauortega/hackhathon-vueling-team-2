@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "PolySans";
+  font-weight: 900;
+  src: url("/fonts/PolySans-Black.woff2") format("woff2");
+}
+
+.tableBg {
+  width: 65%;
+  margin: auto;
+  opacity: 0.5;
+  position: absolute;
+  top: 147px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.main {
+  background: #000000;
+  color: #ffcc00;
+}
+
+.h3 {
+  font-family: "PolySans";
+  text-transform: uppercase;
+  font-size: 20px;
+  padding: 20px 10px;
+  cursor: pointer;
+}
+
+.table {
+  margin: auto;
+}
+
+.tableBody {
+  position: relative;
+}
+
+.tableBody:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 204, 0, 0.15);
+  border-radius: 30px;
+  z-index: 0;
+}
+
+.cell {
+  text-align: center;
+  padding: 0 20px;
+  height: 90px;
+  border-bottom: 1px solid #ffcc00;
+  cursor: pointer;
+}
+
+.cell p {
+  font-weight: 300;
+  padding: 1rem 0;
+}
+
+.doubleCell {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

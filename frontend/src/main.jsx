@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import Router from "./components/Router";
+import axios from "axios";
 import "./index.css";
 
 // Create a new context
@@ -10,16 +11,28 @@ function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("https://vuelingemployee-api.azurewebsites.net/User/login");
-      const data = await response.json();
-      console.log(data);
-      setUsers(data);
+
+      axios
+        .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
+          username: "VuelingEmployeeUser",
+          password: "VuelingEmployeeUser$123",
+        })
+        .then(function (response) {
+          console.log(response);
+          setUsers(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
     }
     fetchData();
   }, []);
 
+  const userData = { users, setUsers };
+
   return (
-    <UsersContext.Provider value={users}>
+    <UsersContext.Provider value={userData}>
       <Router />
     </UsersContext.Provider>
   );

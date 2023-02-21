@@ -10,15 +10,12 @@ function Navbar({ children }) {
   }
 
   return (
-    <div className="navbar bg-[#4d4d4d]">
+    <div className="fixed z-10 navbar bg-[#4d4d4d]">
       <div className="flex-1">
         <img src={logo} className="w-8" alt="logo" />
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-          {/* <li>
-            <a>Item 1</a>
-          </li> */}
           <li tabIndex={0}>
             <a className="text-white">
               <svg
@@ -48,28 +45,6 @@ function Navbar({ children }) {
         </ul>
       </div>
     </div>
-    // <div className="fixed z-[100] flex w-full items-center justify-between  bg-[#4d4d4d] p-3 text-center text-white">
-    //   <button className="text-white" onClick={handleBack}>
-    //     {/* icono */}
-    //     <svg
-    //       xmlns="http://www.w3.org/2000/svg"
-    //       fill="none"
-    //       viewBox="0 0 24 24"
-    //       strokeWidth={1.5}
-    //       stroke="currentColor"
-    //       className="w-6 h-6"
-    //     >
-    //       <path
-    //         strokeLinecap="round"
-    //         strokeLinejoin="round"
-    //         d="M15.75 19.5L8.25 12l7.5-7.5"
-    //       />
-    //     </svg>
-    //   </button>
-    //   <div className="flex flex-grow justify-center">
-    //     <img src={logo} className="w-6" alt="logo" />
-    //   </div>
-    // </div>
   )
 }
 
