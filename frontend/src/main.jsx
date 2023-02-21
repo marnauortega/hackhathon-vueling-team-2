@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import ReactDOM from "react-dom/client";
-import Router from "./components/Router/Router";
+import Router from "./components/Router";
 import "./index.css";
 
 // Create a new context
