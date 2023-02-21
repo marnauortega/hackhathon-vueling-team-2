@@ -1,3 +1,75 @@
+.h1 {
+  font-family: "Polysans";
+  font-size: 100px;
+  color: #ffcc00;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.line {
+  position: absolute;
+  left: 50%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 150px 0;
+}
+
+.p {
+  font-family: "Polysans";
+  color: #ffcc00;
+  font-size: 35px;
+  /* width: 500px; */
+  padding: 300px 90px 300px 90px;
+  box-sizing: content-box;
+  display: block;
+}
+
+.right {
+  grid-column: 2/3;
+}
+
+.left {
+  grid-column: 1/2;
+  text-align: right;
+}
+
+.secondRight {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+
+.ellipse {
+  position: absolute;
+  left: -200px;
+}
+
+.square {
+  position: absolute;
+  left: -300px;
+}
+
+.hands {
+  position: absolute;
+  left: 20px;
+  padding-top: 300px;
+  width: 290px;
+}
+
+.triangle {
+  position: absolute;
+  right: -200px;
+}
+
+.suitcase {
+  position: absolute;
+  padding-top: 250px;
+  right: 150px;
+}
+
 .card {
   border-radius: 15px;
 }
