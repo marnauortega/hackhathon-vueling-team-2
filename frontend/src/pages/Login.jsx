@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import styles from "../styles/Login.module.css";
 
 function Login() {
   const usersFake = [
@@ -28,14 +29,14 @@ function Login() {
   return (
     <>
       <div className="relative flex items-center h-screen justify-center px-4 text-[#4d4d4d]">
-        <div className="flex h-[300px] rounded-md bg-[#ffcc00] flex-col justify-between p-6">
+        <div className={`${styles.card} flex w-[400px] h-[300px] bg-[#ffcc00] flex-col justify-between p-6`}>
           <div className="w-full space-y-8 ">
             <div className="">
-              <h2 className="mt-5 text-3xl font-bold tracking-tight">Login</h2>
+              <h2 className={`${styles.heading} mt-5 text-3xl font-bold tracking-tight`}>Login</h2>
             </div>
             <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" defaultValue="true" />
-              <div className="grid gap-2 rounded-md shadow-sm">
+              <div className="grid gap-3 rounded-md shadow-sm">
                 <div>
                   <label htmlFor="email-address" className="sr-only">
                     Email address
@@ -45,7 +46,7 @@ function Login() {
                     name="email"
                     type="email"
                     required
-                    className="p-1 rounded-sm w-full max-w-xs bg-white"
+                    className="p-1 rounded-sm w-full bg-white"
                     placeholder="User email"
                     value={values.email}
                     onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}

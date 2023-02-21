@@ -69,3 +69,7 @@
   gap: 1rem;
   justify-content: center;
 }
+
+.task {
+  width: 60px;
+}
