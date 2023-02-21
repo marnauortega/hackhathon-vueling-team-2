@@ -10,7 +10,7 @@ function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/users");
+      const response = await fetch("https://vuelingemployee-api.azurewebsites.net/User/login");
       const data = await response.json();
       console.log(data);
       setUsers(data);
