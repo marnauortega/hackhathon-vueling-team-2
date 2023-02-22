@@ -17,6 +17,7 @@ function App() {
 
   // Hardcodeado para poderlo presentar mañana
   const [users, setUsers] = useState(usersFake);
+  const [logged, setLogged] = useState(false);
 
   // useEffect(() => {
   //   async function login() {
@@ -37,7 +38,7 @@ function App() {
   //   login()
   // }, [])
 
-  const contextData = { token, email, setToken, setEmail, password, setPassword, users, setUsers };
+  const contextData = { token, email, setToken, setEmail, password, setPassword, users, setUsers, logged, setLogged };
 
   return (
     <UsersContext.Provider value={contextData}>

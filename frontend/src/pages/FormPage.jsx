@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../main";
 import styles from "../styles/Form.module.css";
+import { Link } from "react-router-dom";
 
 export const FormPage = () => {
   // const url ='https://vuelingemployee-api.azurewebsites.net/Handling'
@@ -200,7 +201,10 @@ export const FormPage = () => {
               </div>
 
               {/* button */}
-              <div className="px-4 py-3 text-right sm:px-6 mt-4">
+              <div className={styles.buttons}>
+                <Link className={styles.charts} to="/chart">
+                  Charts
+                </Link>
                 <button
                   onClick={(e) => handleFormSubmit}
                   className="inline-flex justify-center items-center text-sm font-medium   hover:bg-slate-600 rounded-full bg-[#4d4d4d] text-white px-8 py-2"

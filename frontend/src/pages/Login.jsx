@@ -12,8 +12,11 @@ import square from "../assets/img/square.png";
 import hands from "../assets/img/hands.png";
 import plane from "../assets/img/plane.png";
 import { motion } from "framer-motion";
+import { UsersContext } from "../main";
 
 function Login() {
+  const { setLogged } = useContext(UsersContext);
+
   const usersFake = [
     { email: "admin@admin.com", password: "1234admin" },
     { email: "user@user.com", password: "1234user" },
@@ -24,13 +27,19 @@ function Login() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     usersFake.map((item) => {
       if (values.email === item.email && values.password === item.password) {
         console.log("has entrado");
+        setLogged(true);
+        window.scrollTo({ top: 0 });
+        navigate("/viewer");
       } else {
-        console.log("datos no válidos");
+        console.log("no has entrado");
+        setLogged(false);
       }
     });
   };
@@ -189,7 +198,7 @@ function Login() {
               </div>
 
               <div className="flex justify-center">
-                <button type="submit" className="rounded-full bg-[#4d4d4d] text-white px-8 py-2">
+                <button type="submit" className="rounded-full bg-[#4d4d4d] text-white px-8 py-2" onClick={handleSubmit}>
                   <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
                   Sign in
                 </button>
