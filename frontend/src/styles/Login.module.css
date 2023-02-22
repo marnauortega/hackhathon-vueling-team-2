@@ -56,7 +56,7 @@
 }
 
 .rotate {
-  animation: rotate 6s ease infinite;
+  animation: rotate 3s ease infinite alternate;
 }
 
 .left {
@@ -121,7 +121,7 @@
   }
 
   to {
-    transform: rotate(15deg);
+    transform: rotate(10deg);
   }
 }
 

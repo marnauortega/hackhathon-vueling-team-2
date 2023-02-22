@@ -25,6 +25,8 @@ function Login() {
     password: "",
   });
 
+  const [error, setError] = useState();
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -38,6 +40,7 @@ function Login() {
       } else {
         console.log("no has entrado");
         setLogged(false);
+        setError(true);
       }
     });
   };
@@ -144,7 +147,7 @@ function Login() {
       </div>
       <div className="relative flex items-center h-screen justify-center px-4 text-[#4d4d4d] z-20">
         <motion.div
-          className={`${styles.card} flex w-[400px] h-[300px] bg-[#ffcc00] flex-col justify-between p-6`}
+          className={`${styles.card} flex w-[400px] h-[350px] bg-[#ffcc00] flex-col justify-between p-6`}
           initial={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -167,7 +170,7 @@ function Login() {
                     name="email"
                     type="email"
                     required
-                    className="p-1 rounded-sm w-full bg-white"
+                    className={error ? "p-1 rounded-sm w-full bg-red-300" : "p-1 rounded-sm w-full bg-white"}
                     placeholder="User email"
                     value={values.email}
                     onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
@@ -182,7 +185,7 @@ function Login() {
                     name="password"
                     type="password"
                     required
-                    className="p-1 rounded-sm w-full bg-white"
+                    className={error ? "p-1 rounded-sm w-full bg-red-300" : "p-1 rounded-sm w-full bg-white"}
                     placeholder="Contraseña"
                     value={values.password}
                     onChange={(e) =>
@@ -193,6 +196,7 @@ function Login() {
                     }
                   />
                 </div>
+                <label className={error ? "text-red-600" : "hidden"}>Datos incorrectos</label>
               </div>
 
               <div className="flex justify-center">

@@ -6,7 +6,7 @@ import parttime from "../assets/img/part-time-employee.svg";
 import jardinera from "../assets/img/jardinera.svg";
 import equipaje from "../assets/img/equipaje.svg";
 import coordinacion from "../assets/img/coordinacion.svg";
-import asc from "../assets/img/asc.svg";
+import asc from "../assets/img/des.svg";
 import des from "../assets/img/asc.svg";
 
 const Home = () => {
