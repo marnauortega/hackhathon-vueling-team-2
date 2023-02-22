@@ -1,7 +1,5 @@
 import { useContext, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import styles from "../styles/Login.module.css";
 import line from "../assets/img/line.svg";
 import ellipse from "../assets/img/ellipse.png";
@@ -27,6 +25,8 @@ function Login() {
     password: "",
   });
 
+  const [error, setError] = useState();
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -40,6 +40,7 @@ function Login() {
       } else {
         console.log("no has entrado");
         setLogged(false);
+        setError(true);
       }
     });
   };
@@ -65,7 +66,7 @@ function Login() {
         <div className={styles.right}>
           <motion.img
             src={ellipse}
-            className={styles.ellipse}
+            className={`${styles.ellipse} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +74,7 @@ function Login() {
           />
           <motion.img
             src={bus}
-            className={styles.bus}
+            className={`${styles.bus} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +90,7 @@ function Login() {
             GET THE BUSES FROM TERMINAL TO PLANES WITH COMPLETE FLEXIBILITY
           </motion.p>
         </div>
-        <div>
+        <div className={styles.middle}>
           <motion.img
             src={triangle}
             className={styles.triangle}
@@ -100,7 +101,7 @@ function Login() {
           />
           <motion.img
             src={suitcase}
-            className={styles.suitcase}
+            className={`${styles.suitcase} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +128,7 @@ function Login() {
           />
           <motion.img
             src={hands}
-            className={styles.hands}
+            className={`${styles.hands} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +147,7 @@ function Login() {
       </div>
       <div className="relative flex items-center h-screen justify-center px-4 text-[#4d4d4d] z-20">
         <motion.div
-          className={`${styles.card} flex w-[400px] h-[300px] bg-[#ffcc00] flex-col justify-between p-6`}
+          className={`${styles.card} flex w-[400px] h-[350px] bg-[#ffcc00] flex-col justify-between p-6`}
           initial={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -169,7 +170,7 @@ function Login() {
                     name="email"
                     type="email"
                     required
-                    className="p-1 rounded-sm w-full bg-white"
+                    className={error ? "p-1 rounded-sm w-full bg-red-300" : "p-1 rounded-sm w-full bg-white"}
                     placeholder="User email"
                     value={values.email}
                     onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
@@ -184,7 +185,7 @@ function Login() {
                     name="password"
                     type="password"
                     required
-                    className="p-1 rounded-sm w-full bg-white"
+                    className={error ? "p-1 rounded-sm w-full bg-red-300" : "p-1 rounded-sm w-full bg-white"}
                     placeholder="Contraseña"
                     value={values.password}
                     onChange={(e) =>
@@ -195,6 +196,7 @@ function Login() {
                     }
                   />
                 </div>
+                <label className={error ? "text-red-600" : "hidden"}>Datos incorrectos</label>
               </div>
 
               <div className="flex justify-center">
