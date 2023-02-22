@@ -1,4 +1,4 @@
-![Vueling Hackathon](/hackhathon-vueling-team-2/frontend/src/assets/img/screenshot.webp)
+![Vueling Hackathon](/frontend/src/assets/img/screenshot.webp)
 
 [Live Site](https://volandovengo.netlify.app)
 
