@@ -1,15 +1,38 @@
 .h1 {
   font-family: "Polysans";
-  font-size: 100px;
+  font-size: 90px;
   color: #ffcc00;
   text-transform: uppercase;
   text-align: center;
-  padding-top: 80px;
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+.plane {
+  position: fixed;
+  left: 50%;
+  bottom: 5rem;
+  transform: translateX(-50%);
+  z-index: 10;
+  transition: opacity 1s ease;
+}
+
+.planeBg {
+  position: fixed;
+  width: 120px;
+  bottom: 0;
+  height: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: #181817;
 }
 
 .line {
   position: absolute;
   left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center top;
 }
 
 .grid {
@@ -45,6 +68,12 @@
 .ellipse {
   position: absolute;
   left: -200px;
+}
+
+.bus {
+  position: absolute;
+  padding-top: 250px;
+  left: 40px;
 }
 
 .square {
