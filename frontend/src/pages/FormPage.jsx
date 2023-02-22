@@ -1,63 +1,64 @@
-import React, { useContext, useEffect, useState } from "react"
-import { UsersContext } from "../main"
+import React, { useContext, useEffect, useState } from "react";
+import { UsersContext } from "../main";
+import styles from "../styles/Form.module.css";
 
 export const FormPage = () => {
   // const url ='https://vuelingemployee-api.azurewebsites.net/Handling'
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState({ show: false, msg: "" })
-  const [data, setData] = useState({})
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState({ show: false, msg: "" });
+  const [data, setData] = useState({});
 
   // Full Time states
-  const [fullTimeJardinera, setFullTimeJardinera] = useState(6)
-  const [fullTimeEquipaje, setFullTimeEquipaje] = useState(7.25)
-  const [fullTimeCoordinacion, setFullTimeCoordinacion] = useState(10)
+  const [fullTimeJardinera, setFullTimeJardinera] = useState(6);
+  const [fullTimeEquipaje, setFullTimeEquipaje] = useState(7.25);
+  const [fullTimeCoordinacion, setFullTimeCoordinacion] = useState(10);
 
   // Part Time states
 
-  const [partTimeJardinera, setPartTimeJardinera] = useState(7.5)
-  const [partTimeEquipaje, setPartTimeEquipaje] = useState(7)
-  const [partTimeCoordinacion, setPartTimeCoordinacion] = useState(8.5)
+  const [partTimeJardinera, setPartTimeJardinera] = useState(7.5);
+  const [partTimeEquipaje, setPartTimeEquipaje] = useState(7);
+  const [partTimeCoordinacion, setPartTimeCoordinacion] = useState(8.5);
 
   const fetchUrl = async () => {
-    const url = "https://vuelingemployee-api.azurewebsites.net/Costs"
-    setIsLoading(true)
+    const url = "https://vuelingemployee-api.azurewebsites.net/Costs";
+    setIsLoading(true);
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const response = await fetch(url, {
         headers: {
           authorization: `Bearer ${token}`,
         },
-      })
-      const data = await response.json()
-      console.log(data.result[0].fullTimeCost)
+      });
+      const data = await response.json();
+      console.log(data.result[0].fullTimeCost);
 
-      setFullTimeJardinera(data.result[0].fullTimeCost)
-      setPartTimeJardinera(data.result[0].partTimeCost)
+      setFullTimeJardinera(data.result[0].fullTimeCost);
+      setPartTimeJardinera(data.result[0].partTimeCost);
 
-      setFullTimeCoordinacion(data.result[1].fullTimeCost)
-      setPartTimeCoordinacion(data.result[1].partTimeCost)
+      setFullTimeCoordinacion(data.result[1].fullTimeCost);
+      setPartTimeCoordinacion(data.result[1].partTimeCost);
 
-      setFullTimeEquipaje(data.result[2].fullTimeCost)
-      setPartTimeEquipaje(data.result[2].partTimeCost)
+      setFullTimeEquipaje(data.result[2].fullTimeCost);
+      setPartTimeEquipaje(data.result[2].partTimeCost);
 
       if (data.isOk === "true") {
-        setData(data.result)
-        console.log(data.result)
-        setError({ show: false, msg: "" })
-        setIsLoading(false)
+        setData(data.result);
+        console.log(data.result);
+        setError({ show: false, msg: "" });
+        setIsLoading(false);
       } else {
-        setError({ show: true, msg: data.Error })
+        setError({ show: true, msg: data.Error });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleFormSubmit = (e) => {
-    e.preventDefault()
-    fetchUrl()
-  }
+    e.preventDefault();
+    fetchUrl();
+  };
 
   return (
     <>
@@ -83,15 +84,10 @@ export const FormPage = () => {
                 }}
               ></lord-icon>
               {/* JARDINERA */}
-              <h3 className="flex text-gray-700 justify-center items-center font-bold  mt-6 mb-2">
-                Jardinera
-              </h3>
+              <h3 className="flex text-gray-700 justify-center items-center font-bold  mt-6 mb-2">Jardinera</h3>
               <div className="flex gap-6">
                 <div className="">
-                  <label
-                    htmlFor="fullTimeJardinera"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="fullTimeJardinera" className="block text-sm font-medium text-gray-700">
                     Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -108,10 +104,7 @@ export const FormPage = () => {
                   </div>
                 </div>
                 <div className="">
-                  <label
-                    htmlFor="partTimeJardinera"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="partTimeJardinera" className="block text-sm font-medium text-gray-700">
                     Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -130,15 +123,10 @@ export const FormPage = () => {
               </div>
 
               {/* EQUIPAJE */}
-              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">
-                Equipaje
-              </h3>
+              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">Equipaje</h3>
               <div className="flex gap-6">
                 <div className="">
-                  <label
-                    htmlFor="fullTimeEquipaje"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="fullTimeEquipaje" className="block text-sm font-medium text-gray-700">
                     Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -155,10 +143,7 @@ export const FormPage = () => {
                   </div>
                 </div>
                 <div className="">
-                  <label
-                    htmlFor="partTimeEquipaje"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="partTimeEquipaje" className="block text-sm font-medium text-gray-700">
                     Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -176,15 +161,10 @@ export const FormPage = () => {
                 </div>
               </div>
               {/* Coordinacion */}
-              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">
-                Coordinación
-              </h3>
+              <h3 className="flex text-gray-700 justify-center items-center font-bold mt-6 mb-2">Coordinación</h3>
               <div className="flex gap-6">
                 <div className="">
-                  <label
-                    htmlFor="fullTimeCoordinacion"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="fullTimeCoordinacion" className="block text-sm font-medium text-gray-700">
                     Full Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -201,10 +181,7 @@ export const FormPage = () => {
                   </div>
                 </div>
                 <div className="">
-                  <label
-                    htmlFor="partTimeCoordinacion"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="partTimeCoordinacion" className="block text-sm font-medium text-gray-700">
                     Part Time {`${"€/h"}`}
                   </label>
                   <div className="mt-1 flex rounded-md shadow-sm text-gray-700 ">
@@ -236,5 +213,5 @@ export const FormPage = () => {
         </form>
       </div>
     </>
-  )
-}
+  );
+};
