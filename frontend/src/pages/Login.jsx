@@ -11,39 +11,67 @@ import hands from "../assets/img/hands.png";
 import plane from "../assets/img/plane.png";
 import { motion } from "framer-motion";
 import { UsersContext } from "../main";
+import axios from "axios";
 
 function Login() {
   const { setLogged } = useContext(UsersContext);
 
-  const usersFake = [
-    { email: "admin@admin.com", password: "1234admin" },
-    { email: "user@user.com", password: "1234user" },
-  ];
+  // const usersFake = [
+  //   { email: "admin@admin.com", password: "1234admin" },
+  //   { email: "user@user.com", password: "1234user" },
+  // ];
+  const [user, setUser] = useState();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
 
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
+        username: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response.data.result);
+        setToken(response.data.result);
+        localStorage.setItem("token", response.data.result);
+        setUser(email);
+        setLogged(true);
+        window.scrollTo({ top: 0 });
+        console.log("token", token);
+        email === "VuelingEmployeeUser" ? navigate("/viewer") : navigate("/formPage");
+      })
+      .catch(function (err) {
+        setError(err);
+        console.log(err);
+      });
+  };
+
+  // const [values, setValues] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
   const [error, setError] = useState();
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    usersFake.map((item) => {
-      if (values.email === item.email && values.password === item.password) {
-        console.log("has entrado");
-        setLogged(true);
-        window.scrollTo({ top: 0 });
-        navigate("/viewer");
-      } else {
-        console.log("no has entrado");
-        setLogged(false);
-        setError(true);
-      }
-    });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   usersFake.map((item) => {
+  //     if (values.email === item.email && values.password === item.password) {
+  //       console.log("has entrado");
+  //       setLogged(true);
+  //       window.scrollTo({ top: 0 });
+  //       navigate("/viewer");
+  //     } else {
+  //       console.log("no has entrado");
+  //       setLogged(false);
+  //       setError(true);
+  //     }
+  //   });
+  // };
 
   const planeRef = useRef();
 
@@ -172,8 +200,8 @@ function Login() {
                     required
                     className={error ? "p-1 rounded-sm w-full bg-red-300" : "p-1 rounded-sm w-full bg-white"}
                     placeholder="User email"
-                    value={values.email}
-                    onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
@@ -187,13 +215,8 @@ function Login() {
                     required
                     className={error ? "p-1 rounded-sm w-full bg-red-300" : "p-1 rounded-sm w-full bg-white"}
                     placeholder="Contraseña"
-                    value={values.password}
-                    onChange={(e) =>
-                      setValues((prev) => ({
-                        ...prev,
-                        password: e.target.value,
-                      }))
-                    }
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <label className={error ? "text-red-600" : "hidden"}>Datos incorrectos</label>
