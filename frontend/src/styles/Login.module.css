@@ -55,6 +55,10 @@
   grid-column: 2/3;
 }
 
+.rotate {
+  animation: rotate 6s ease infinite;
+}
+
 .left {
   grid-column: 1/2;
   text-align: right;
@@ -109,4 +113,20 @@
   text-transform: uppercase;
   font-family: "Polysans";
   margin-bottom: 3rem;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(15deg);
+  }
+}
+
+@media (max-height: 730px) {
+  .h1 {
+    font-size: 60px;
+  }
 }

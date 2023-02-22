@@ -1,7 +1,5 @@
 import { useContext, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import styles from "../styles/Login.module.css";
 import line from "../assets/img/line.svg";
 import ellipse from "../assets/img/ellipse.png";
@@ -65,7 +63,7 @@ function Login() {
         <div className={styles.right}>
           <motion.img
             src={ellipse}
-            className={styles.ellipse}
+            className={`${styles.ellipse} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +71,7 @@ function Login() {
           />
           <motion.img
             src={bus}
-            className={styles.bus}
+            className={`${styles.bus} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +87,7 @@ function Login() {
             GET THE BUSES FROM TERMINAL TO PLANES WITH COMPLETE FLEXIBILITY
           </motion.p>
         </div>
-        <div>
+        <div className={styles.middle}>
           <motion.img
             src={triangle}
             className={styles.triangle}
@@ -100,7 +98,7 @@ function Login() {
           />
           <motion.img
             src={suitcase}
-            className={styles.suitcase}
+            className={`${styles.suitcase} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +125,7 @@ function Login() {
           />
           <motion.img
             src={hands}
-            className={styles.hands}
+            className={`${styles.hands} ${styles.rotate}`}
             initial={{ opacity: 0, y: 50 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
             whileInView={{ opacity: 1, y: 0 }}

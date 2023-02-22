@@ -6,6 +6,8 @@ import parttime from "../assets/img/part-time-employee.svg";
 import jardinera from "../assets/img/jardinera.svg";
 import equipaje from "../assets/img/equipaje.svg";
 import coordinacion from "../assets/img/coordinacion.svg";
+import asc from "../assets/img/asc.svg";
+import des from "../assets/img/asc.svg";
 
 const Home = () => {
   const { users, setUsers } = useContext(UsersContext);
@@ -135,42 +137,52 @@ const Home = () => {
     }
   };
 
+  const biggestCost = users.reduce((acc, row) => {
+    console.log(row.totalCost, acc, row.totalCost > acc);
+    return row.totalCost > acc ? row.totalCost : acc;
+  }, 0);
+
   return (
     <main className={styles.main}>
       {/* <img src={table} className={styles.tableBg} /> */}
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>
+            <th className={styles.filter}>
               <h3 className={styles.h3} onClick={sortByDay}>
                 Day
               </h3>
+              <img className={styles.sort} src={filters.day === "des" ? asc : des} />
             </th>
-            <th>
+            <th className={styles.filter}>
               <h3 className={styles.h3} onClick={sortByHour}>
                 Hour
               </h3>
+              <img className={styles.sort} src={filters.hour === "des" ? asc : des} />
             </th>
-            <th>
+            <th className={styles.filter}>
               <h3 className={styles.h3} onClick={sortByTask}>
                 Task
               </h3>
+              <img className={styles.sort} src={filters.handlingFunction === "des" ? asc : des} />
             </th>
             <th>
               <h3 className={styles.h3}>Employees</h3>
             </th>
-            <th>
+            <th className={styles.filter}>
               <h3 className={styles.h3} onClick={sortByEmp}>
                 Total Emp.
               </h3>
+              <img className={styles.sort} src={filters.totalEmployees === "des" ? asc : des} />
             </th>
             <th>
               <h3 className={styles.h3}>Cost</h3>
             </th>
-            <th>
+            <th className={styles.filter}>
               <h3 className={styles.h3} id="asc" onClick={sortByCost}>
                 Total cost
               </h3>
+              <img className={styles.sort} src={filters.totalCost === "des" ? asc : des} />
             </th>
           </tr>
         </thead>
@@ -208,6 +220,12 @@ const Home = () => {
               </td>
               <td className={styles.cell}>
                 <p>{row.totalCost} €</p>
+                <div className={styles.bar}>
+                  <div
+                    className={styles.progress}
+                    style={{ transform: `scaleX(${(row.totalCost / biggestCost) * 100}%)` }}
+                  ></div>
+                </div>
               </td>
             </tr>
           ))}
