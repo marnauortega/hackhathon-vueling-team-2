@@ -3,35 +3,44 @@ import ReactDOM from "react-dom/client";
 import Router from "./components/Router";
 import axios from "axios";
 import "./index.css";
-import usersDb from "../src/data/db";
+import usersFake from "./data/db";
 
 // Create a new context
 export const UsersContext = createContext();
 
 function App() {
-  const [users, setUsers] = useState(usersDb);
+  const url = "https://vuelingemployee-api.azurewebsites.net/User/login";
+  const [token, setToken] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const roleKey = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+
+  // Hardcodeado para poderlo presentar mañana
+  const [users, setUsers] = useState(usersFake);
+
   // useEffect(() => {
-  //   async function fetchData() {
+  //   async function login() {
   //     axios
   //       .post(" https://vuelingemployee-api.azurewebsites.net/User/login", {
   //         username: "VuelingEmployeeUser",
   //         password: "VuelingEmployeeUser$123",
   //       })
   //       .then(function (response) {
-  //         console.log(response);
-  //         setUsers(response);
+  //         console.log(response.data.result)
+  //         setUsers(response)
+  //         setToken(response.data.result)
   //       })
   //       .catch(function (error) {
-  //         console.log(error);
-  //       });
+  //         console.log(error)
+  //       })
   //   }
-  //   fetchData();
-  // }, []);
+  //   login()
+  // }, [])
 
-  const userData = { users, setUsers };
+  const contextData = { token, email, setToken, setEmail, password, setPassword, users, setUsers };
 
   return (
-    <UsersContext.Provider value={userData}>
+    <UsersContext.Provider value={contextData}>
       <Router />
     </UsersContext.Provider>
   );

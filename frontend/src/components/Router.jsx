@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import { FormPage } from "../pages/FormPage";
-// import { Rechart } from "../pages/Rechart";
+// import { Rechart } from "../pages/Rechart"
 
 const Router = () => {
   return (

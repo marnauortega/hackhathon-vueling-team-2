@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UsersContext } from "../main";
 import styles from "../styles/Form.module.css";
 
 export const FormPage = () => {
@@ -23,7 +24,12 @@ export const FormPage = () => {
     const url = "https://vuelingemployee-api.azurewebsites.net/Costs";
     setIsLoading(true);
     try {
-      const response = await fetch(url);
+      const token = localStorage.getItem("token");
+      const response = await fetch(url, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       console.log(data.result[0].fullTimeCost);
 
@@ -51,11 +57,8 @@ export const FormPage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  };
-
-  useEffect(() => {
     fetchUrl();
-  }, []);
+  };
 
   return (
     <>
